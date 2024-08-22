@@ -4,7 +4,7 @@ import math
 
 def catalan(n):
     #get the n-th catalan number
-    return math.factorial(2*n) / (math.factorial(n + 1) * math.factorial(n))
+    return int(math.factorial(2*n) / (math.factorial(n + 1) * math.factorial(n)))
 
 def number_of_triangulations(n):
     #get the number of triangulations of a regular n-gon
@@ -56,12 +56,12 @@ def generate_frieze_pattern(n,I):
        frieze_seq.append(flat_list.count(v) + 1)
    else:
        frieze_seq.append(1)
- r_1 = [1] * n
- r_2 = frieze_seq
- r_3 = [int(((r_2[i-1] * r_2[i]) - 1) / r_1[i-1]) for i in range(1, 7)]
- r_4 = [int(((r_3[i-1] * r_3[i]) - 1) / r_2[i]) for i in range(1, 6)]
- r_5 = [int(((r_4[i-1] * r_4[i]) - 1) / r_3[i]) for i in range(1, 5)]
- r_6 = [int(((r_5[i-1] * r_5[i]) - 1) / r_4[i]) for i in range(1, 4)]
+ r_1 = [1] * (n + 4)
+ r_2 = frieze_seq + frieze_seq[0:4]
+ r_3 = [int(((r_2[i-1] * r_2[i]) - 1) / r_1[i-1]) for i in range(1, n + 4)]
+ r_4 = [int(((r_3[i-1] * r_3[i]) - 1) / r_2[i]) for i in range(1, n + 3)]
+ r_5 = [int(((r_4[i-1] * r_4[i]) - 1) / r_3[i]) for i in range(1, n + 2)]
+ r_6 = [int(((r_5[i-1] * r_5[i]) - 1) / r_4[i]) for i in range(1, n + 1)]
  return [r_1,r_2,r_3,r_4,r_5,r_6]
 
 
